@@ -7,7 +7,7 @@ import { Injectable, inject } from '@angular/core';
 export class ProductService {
 
   constructor() { }
-  apiUrl = 'https://react-typescript-web-backend.vercel.app/products'; // khai bao apiUrl
+  apiUrl = 'https://fakestoreapi.com/products'; // khai bao apiUrl
   http = inject(HttpClient); // inject bien http
 
   getProductList(){

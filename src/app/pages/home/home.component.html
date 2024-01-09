@@ -42,7 +42,7 @@
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                             <i class="fa-solid fa-users"></i>
                         </div>
-                        <input type="date" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com">
+                        <input type="text" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="2 người * 1 trẻ em * 1 phòng">
                     </div>
                   </div>
                   <div class="">
@@ -133,8 +133,9 @@
 </div>
 <div class="mt-10">
   <h2 class="text-2xl md:text-3xl font-medium mb-2">Top khách sạn thịnh hành</h2>
-  <div class="flex gap-2 mt-5">
-    <div class="max-w-52 rounded overflow-hidden hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] shadow-md duration-200">
+  <div class="grid grid-cols-5 gap-2 mt-5">
+    <app-product-card *ngFor="let item of productList" [product]="item"></app-product-card>
+    <!-- <div class="max-w-52 rounded overflow-hidden hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] shadow-md duration-200">
       <img src="https://cdn3.ivivu.com/2014/01/SUPER-DELUXE2.jpg" alt="">
       <div class="px-2">
         <p class="font-medium leading-5">Millennium Hanoi Hotel</p>
@@ -223,7 +224,7 @@
         </div>
         <p class="text-red-500 font-medium">666.000 VND</p>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
 <div>
