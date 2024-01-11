@@ -1,18 +1,14 @@
-<div class="max-w-52 rounded overflow-hidden hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] shadow-md duration-200">
-  <img class="h-[200px]" [src]="product.image" alt="">
+<div class="rounded overflow-hidden hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] shadow-md duration-200">
+  <img class="h-[200px]" [src]="hotel.image.path" alt="">
   <div class="px-2">
-    <p class="font-medium leading-5">{{product.title}}</p>
-    <div class="text-yellow-400 text-xs mt-1">
-      <i class="fa-solid fa-star"></i>
-      <i class="fa-solid fa-star"></i>
-      <i class="fa-solid fa-star"></i>
-    </div>
+    <p class="font-medium leading-5">{{hotel.name}}</p>
+    <app-ranking-star [numberRank]="hotel.ranking"></app-ranking-star>
     <div class="text-xs flex items-center gap-2 mt-1">
       <div class="w-5 h-5 rounded-sm bg-blue-200 flex items-center justify-center">
-        <span>8.9</span>
+        <span>{{hotel.ranking}}</span>
       </div>
       <span>(1646 đánh giá)</span>
     </div>
-    <p class="text-red-500 font-medium">{{product.price}}$</p>
+    <p class="text-red-500 font-medium mt-4">1.000.000 đ</p>
   </div>
 </div>

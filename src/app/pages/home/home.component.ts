@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { ProductService } from '../../services/product.service';
+import { HotelsService} from '../../services/hotels.service';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { NgFor } from '@angular/common';
+import { Hotel } from '../../types/hotel';
 
 @Component({
   selector: 'app-home',
@@ -13,11 +14,11 @@ import { NgFor } from '@angular/common';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  productService = inject(ProductService);
-  productList:any;
+  hotelsService = inject(HotelsService);
+  hotelList:Hotel[] = [];
   ngOnInit(): void {
-    this.productService
-      .getProductList()
-      .subscribe((products) => (this.productList = products)); // callApi.then(cb fuc)
+    this.hotelsService
+      .getHotelList()
+      .subscribe((response) => (this.hotelList = response)); // callApi.then(cb fuc)
   }
 }
