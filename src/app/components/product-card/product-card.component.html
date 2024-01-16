@@ -1,7 +1,7 @@
 <div class="rounded overflow-hidden hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] shadow-md duration-200">
-  <img class="h-[200px]" [src]="hotel.image.path" alt="">
+  <img class="h-[200px]" [src]="hotel.hotelImage.path" alt="">
   <div class="px-2">
-    <p class="font-medium leading-5">{{hotel.name}}</p>
+    <p class="font-medium leading-5">{{hotel.hotelName}}</p>
     <app-ranking-star [numberRank]="hotel.ranking"></app-ranking-star>
     <div class="text-xs flex items-center gap-2 mt-1">
       <div class="w-5 h-5 rounded-sm bg-blue-200 flex items-center justify-center">

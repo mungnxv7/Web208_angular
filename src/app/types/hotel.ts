@@ -1,14 +1,14 @@
  export interface Hotel {
         _id: string
-        name: string,
-        type_ID: string,
+        hotelName: string,
+        hotelType: string,
         address: {
-          city: string,
+          province: string,
           district: string,
           ward: string,
-          specific_location: string
+          street_address: string
         },
-        image: {
+        hotelImage: {
           path: string,
           id_imag: string
         },
@@ -16,5 +16,5 @@
         utilities: [
           string
         ],
-        description: string
+        descreiptionHotel: string
 }
