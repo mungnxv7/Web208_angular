@@ -10,10 +10,10 @@ export class ProvincesService {
   getProvincesAll(){
     return this.http.get(this.url+"?depth=1")
   }
-  getDistrictByProvince(id:string){
+  getDistrictByProvince(id:number){
     return this.http.get(`${this.url}p/${id}/?depth=2`)
   }
-  getWardByDistricts(id:string){
+  getWardByDistricts(id:number){
     return this.http.get(`${this.url}d/${id}/?depth=2`)
   }
 }

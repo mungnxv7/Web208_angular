@@ -1,31 +1,32 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ProvincesService } from '../../../services/provinces.service';
 import { HotelsService } from '../../../services/hotels.service';
 import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
 import { FormsModule } from '@angular/forms';
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Hotel } from '../../../types/hotel';
+import { FormHotel, Hotel } from '../../../types/hotel';
 
 @Component({
   selector: 'app-update-hotel',
   standalone: true,
-  imports: [AngularEditorModule,FormsModule,NgFor,NgIf],
+  imports: [AngularEditorModule,FormsModule,NgFor,NgIf,NgClass],
   templateUrl: './update-hotel.component.html',
   styleUrl: './update-hotel.component.css'
 })
-export class UpdateHotelComponent {
+export class UpdateHotelComponent implements OnInit {
   provincesService = inject(ProvincesService)
   hotelSevices = inject(HotelsService)
   provinces:any = []
   districts:any = []
   wards:any = []
+  hotelItem!:Hotel
   hotelId = ''
   router = inject(Router);
   route = inject(ActivatedRoute);
   htmlContent = '';
 
-  formData = {
+  formData:FormHotel = {
     hotelName: '',
     hotelType:'',
     hotelImage:{
@@ -33,19 +34,22 @@ export class UpdateHotelComponent {
     },
     ranking:'',
     address: {
-      province: '',
-      district:'',
-      ward:'',
+      province:null,
+      district:null,
+      ward:null,
       street_address:''
     },
     descreiptionHotel: ''
-};
+  };
 
-  ngOnInit(){
-    this.route.params.subscribe((param) => {
+ngOnInit(){
+  this.route.params.subscribe((param) => {
       this.hotelId = param['id'];
-      console.log(this.hotelId);
-      return this.hotelSevices.getHotelDetail(this.hotelId).subscribe((hotel)=> {
+      this.hotelSevices.getHotelDetail(this.hotelId).subscribe((hotel)=> {
+        this.hotelItem = hotel;
+        this.provincesService.getProvincesAll().subscribe((respone) => this.provinces = respone)
+        this.provincesService.getDistrictByProvince(hotel.address.province).subscribe((response) => this.districts = response)
+        this.provincesService.getWardByDistricts(hotel.address.district).subscribe((response) => this.wards = response)
         this.formData = {
           hotelName: hotel.hotelName,
           hotelType:hotel.hotelType,
@@ -54,32 +58,31 @@ export class UpdateHotelComponent {
           },
           ranking:`${hotel.ranking}`,
           address: {
-            province:hotel.address.province,
-            district: '',
+            province: hotel.address.province,
+             
+            district: hotel.address.district,
             ward:hotel.address.ward,
             street_address:hotel.address.street_address
           },
           descreiptionHotel: hotel.descreiptionHotel
         }
+        console.log(this.formData);
+        
       })
     });
-    this.provincesService.getProvincesAll().subscribe((respone) => this.provinces = respone )
   }
-  
-  
-
-
-  
-  getDistrictsByValueProvince(event: Event){
-    const selectedIdProvince= (event.target as HTMLSelectElement).selectedOptions[0].getAttribute('data-id');
-   if(selectedIdProvince){
-    this.provincesService.getDistrictByProvince(selectedIdProvince).subscribe((response) => this.districts = response)
-   }
+  getDistrictsByValueProvince(){
+    if(this.formData.address.province){
+      console.log(this.formData);
+        
+      const codeProvince = this.formData.address.province
+      this.provincesService.getDistrictByProvince(codeProvince).subscribe((response) => this.districts = response)
+    }
   }
-  getWardByValueDistrict(event: Event){
-    const selectedIdDistrict= (event.target as HTMLSelectElement).selectedOptions[0].getAttribute('data-id');
-    if(selectedIdDistrict){
-      this.provincesService.getWardByDistricts(selectedIdDistrict).subscribe((response) => this.wards = response)
+  getWardByValueDistrict(){
+    if(this.formData.address.district){
+      const codeDistrict = this.formData.address.district
+      this.provincesService.getWardByDistricts(codeDistrict).subscribe((response) => this.wards = response)
     }
   }
   editorConfig: AngularEditorConfig = {
@@ -100,8 +103,10 @@ export class UpdateHotelComponent {
   
   onSubmit(hotelForm: any){
     if (hotelForm.valid) {
-     const data = {...this.formData, ranking: parseInt(this.formData.ranking)}
-      this.hotelSevices.createHotel(data).subscribe((response)=> alert(response.message))
+      console.log(this.formData);
+      
+    //  const data = {...this.formData, ranking: parseInt(this.formData.ranking)}
+    //   this.hotelSevices.createHotel(data).subscribe((response)=> alert(response.message))
     }else{
       console.log("Thành  công");
     }

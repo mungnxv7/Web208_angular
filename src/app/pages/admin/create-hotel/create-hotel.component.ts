@@ -2,9 +2,12 @@ import { Component, NgModule, inject} from '@angular/core';
 import {NgFor, NgIf} from '@angular/common';
 import { ProvincesService } from '../../../services/provinces.service';
 import { FormsModule} from '@angular/forms';
-import { AngularEditorModule,AngularEditorConfig} from '@kolkov/angular-editor';
+import { AngularEditorModule,AngularEditorConfig, AeSelectComponent} from '@kolkov/angular-editor';
 import { HotelsService } from '../../../services/hotels.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { FormHotel } from '../../../types/hotel';
+
 
 
 
@@ -20,6 +23,7 @@ export class CreateHotelComponent {
   constructor(private toastr: ToastrService) {}
   provincesService = inject(ProvincesService)
   hotelSevices = inject(HotelsService)
+  router = inject(Router)
   provinces:any = []
   districts:any = []
   wards:any = []
@@ -29,16 +33,16 @@ export class CreateHotelComponent {
   }
   
   
-  getDistrictsByValueProvince(event: Event){
-    const selectedIdProvince= (event.target as HTMLSelectElement).selectedOptions[0].getAttribute('data-id');
-   if(selectedIdProvince){
-    this.provincesService.getDistrictByProvince(selectedIdProvince).subscribe((response) => this.districts = response)
-   }
+  getDistrictsByValueProvince(){
+    if(this.formData.address.province){
+      const codeProvince = this.formData.address.province
+      this.provincesService.getDistrictByProvince(codeProvince).subscribe((response) => this.districts = response)
+    }
   }
-  getWardByValueDistrict(event: Event){
-    const selectedIdDistrict= (event.target as HTMLSelectElement).selectedOptions[0].getAttribute('data-id');
-    if(selectedIdDistrict){
-      this.provincesService.getWardByDistricts(selectedIdDistrict).subscribe((response) => this.wards = response)
+  getWardByValueDistrict(){
+    if(this.formData.address.district){
+      const codeDistrict = this.formData.address.district
+      this.provincesService.getWardByDistricts(codeDistrict).subscribe((response) => this.wards = response)
     }
   }
   editorConfig: AngularEditorConfig = {
@@ -56,7 +60,7 @@ export class CreateHotelComponent {
       placeholder: 'Enter text here...',
 
   }
-  formData = {
+  formData:FormHotel = {
     hotelName: '',
     hotelType:'',
     hotelImage:{
@@ -64,9 +68,9 @@ export class CreateHotelComponent {
     },
     ranking:'',
     address: {
-      province:'',
-      district:'',
-      ward:'',
+      province:null,
+      district:null,
+      ward:null,
       street_address:''
     },
     descreiptionHotel: ''
@@ -74,7 +78,10 @@ export class CreateHotelComponent {
   onSubmit(hotelForm: any){
     if (hotelForm.valid) {
      const data = {...this.formData, ranking: parseInt(this.formData.ranking)}
-      this.hotelSevices.createHotel(data).subscribe((response)=> this.toastr.success(response.message) )
+      this.hotelSevices.createHotel(data).subscribe((response)=> {
+        this.toastr.success(response.message)
+        this.router.navigateByUrl('/admin/hotels/list')
+      })
     }
   }
 }
