@@ -103,12 +103,8 @@ ngOnInit(){
   
   onSubmit(hotelForm: any){
     if (hotelForm.valid) {
-      console.log(this.formData);
-      
-    //  const data = {...this.formData, ranking: parseInt(this.formData.ranking)}
-    //   this.hotelSevices.createHotel(data).subscribe((response)=> alert(response.message))
-    }else{
-      console.log("Thành  công");
+     const data = {...this.formData, ranking: parseInt(this.formData.ranking)}
+      this.hotelSevices.createHotel(data).subscribe((response)=> alert(response.message))
     }
   }
 }
