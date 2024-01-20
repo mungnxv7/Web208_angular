@@ -17,6 +17,7 @@ export class RegisterComponent {
   userService = inject(UsersService)
   router = inject(Router)
   confirmPassword=''
+  errorConfimPass = false
   fomrRegister = {
     name:'',
     email:'',
@@ -30,6 +31,8 @@ export class RegisterComponent {
           this.toast.success(response.message)
           this.router.navigateByUrl('/login')
         })
+      }else{
+        this.errorConfimPass=true
       }
       
     }
