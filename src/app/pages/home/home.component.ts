@@ -4,6 +4,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { NgFor } from '@angular/common';
+import { userLocal } from '../../../config/viewLocal';
 import { Hotel } from '../../types/hotel';
 
 @Component({

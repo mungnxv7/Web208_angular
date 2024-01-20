@@ -1,9 +1,10 @@
 import { NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { UsersService } from '../../services/users.service';
 import { ToastrService } from 'ngx-toastr';
-import { userLocal } from '../../../config/userLocal';
+import { userLocal } from '../../../config/viewLocal';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ import { userLocal } from '../../../config/userLocal';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  router = inject(Router)
   toastr = inject(ToastrService)
   userService = inject(UsersService)
   fomrLogin = {
@@ -22,10 +24,13 @@ export class LoginComponent {
   onSubmit(loginForm:any){
     if(loginForm.valid){
       this.userService.login(this.fomrLogin).subscribe((response)=>{
-        console.log(response);
-        
-        // this.toastr.success(response.message)
-        // userLocal.setUserLocal(response.data)
+        userLocal.setUserLocal({user:response.user, accessToken:response.accessToken})
+        this.toastr.success(response.message)
+        if(response.user.role == 'member'){
+          this.router.navigateByUrl('')
+        }else{
+          this.router.navigateByUrl('/admin/hotels/list')
+        }
       })
 
     }

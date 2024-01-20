@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class UsersService {
 
   constructor() { }
-  apiUrl = 'https://backend-web-208-angular.vercel.app/users';
+  apiUrl = 'https://web208-angular-backend.vercel.app/auth';
   http = inject(HttpClient)
   
   configHeaders = {
@@ -18,9 +18,9 @@ export class UsersService {
     }
   }
   login(data:Login){
-    return this.http.post<any>(this.apiUrl+'/signin',data)
+    return this.http.post<any>(this.apiUrl+'/login',data)
   }
   register(data:Register){
-    return this.http.post<any>(this.apiUrl+'/signup',data)
+    return this.http.post<any>(this.apiUrl+'/register',data)
   }
 }

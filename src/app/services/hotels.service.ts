@@ -13,7 +13,7 @@ export class HotelsService {
   }
 
   constructor() { }
-  apiUrl = 'https://backend-web-208-angular.vercel.app/hotels'; // khai bao apiUrl
+  apiUrl = 'https://web208-angular-backend.vercel.app/hotels'// khai bao apiUrl
   http = inject(HttpClient); // inject bien http
 
   getHotelList(): Observable<Hotel[]> {
@@ -24,6 +24,9 @@ export class HotelsService {
   }
   createHotel(hotel:any):Observable<any>{
     return this.http.post<any>(this.apiUrl, hotel,this.configHeaders ); //axios.get(apiUrl)
+  }
+  updateHotel(id:string,hotel:any):Observable<any>{
+    return this.http.put<any>(this.apiUrl+ `/${id}`, hotel,this.configHeaders ); //axios.get(apiUrl)
   }
   getHotelDetail(id: string):Observable<Hotel>{
     return this.http.get<Hotel>(`${this.apiUrl}/${id}`); //axios.get(apiUrl)

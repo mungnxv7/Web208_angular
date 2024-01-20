@@ -59,7 +59,6 @@ ngOnInit(){
           ranking:`${hotel.ranking}`,
           address: {
             province: hotel.address.province,
-             
             district: hotel.address.district,
             ward:hotel.address.ward,
             street_address:hotel.address.street_address
@@ -73,8 +72,6 @@ ngOnInit(){
   }
   getDistrictsByValueProvince(){
     if(this.formData.address.province){
-      console.log(this.formData);
-        
       const codeProvince = this.formData.address.province
       this.provincesService.getDistrictByProvince(codeProvince).subscribe((response) => this.districts = response)
     }
@@ -104,7 +101,7 @@ ngOnInit(){
   onSubmit(hotelForm: any){
     if (hotelForm.valid) {
      const data = {...this.formData, ranking: parseInt(this.formData.ranking)}
-      this.hotelSevices.createHotel(data).subscribe((response)=> alert(response.message))
+      this.hotelSevices.updateHotel(this.hotelId,data).subscribe((response)=> alert(response.message))
     }
   }
 }
