@@ -30,6 +30,8 @@ export class RegisterComponent {
         this.userService.register(this.fomrRegister).subscribe((response)=>{
           this.toast.success(response.message)
           this.router.navigateByUrl('/login')
+        },error=>{
+          this.toast.error(error.message)
         })
       }else{
         this.errorConfimPass=true
