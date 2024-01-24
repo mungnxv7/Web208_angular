@@ -14,3 +14,7 @@ export const userLocal = {
         localStorage.removeItem('USER')
     }
 }
+
+export const configHeaders={
+  "Authorization":"Bearer " + userLocal.getUserLoacal()?.accessToken
+}

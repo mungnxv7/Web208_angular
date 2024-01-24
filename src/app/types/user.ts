@@ -8,3 +8,9 @@ export interface Register {
     password: string;
     role:string
 }
+export interface User {
+    _id:string
+    name:string
+    email: string;
+    role:string
+}

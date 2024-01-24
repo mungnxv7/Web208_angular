@@ -65,8 +65,6 @@ ngOnInit(){
           },
           descreiptionHotel: hotel.descreiptionHotel
         }
-        console.log(this.formData);
-        
       })
     });
   }
