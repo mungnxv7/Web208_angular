@@ -16,4 +16,13 @@ export class ProvincesService {
   getWardByDistricts(id:number){
     return this.http.get(`${this.url}d/${id}/?depth=2`)
   }
+  getProvince(code:number){
+    return this.http.get(`${this.url}/p/${code}/?depth=1`)
+  }
+  getDistrict(code:number){
+    return this.http.get(`${this.url}/d/${code}/?depth=1`)
+  }
+  getWard(code:number){
+    return this.http.get(`${this.url}/w/${code}/?depth=1`)
+  }
 }

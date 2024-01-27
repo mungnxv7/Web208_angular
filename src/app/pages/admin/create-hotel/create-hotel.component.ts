@@ -7,6 +7,8 @@ import { HotelsService } from '../../../services/hotels.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { FormHotel } from '../../../types/hotel';
+import { CategoriesService } from '../../../services/categories.service';
+import { Categories } from '../../../types/categories';
 
 
 
@@ -23,13 +25,16 @@ export class CreateHotelComponent {
   constructor(private toastr: ToastrService) {}
   provincesService = inject(ProvincesService)
   hotelSevices = inject(HotelsService)
+  categoriesService = inject(CategoriesService)
   router = inject(Router)
+  listCategories:Categories[] = []
   provinces:any = []
   districts:any = []
   wards:any = []
   htmlContent = '';
   ngOnInit(){
     this.provincesService.getProvincesAll().subscribe((respone) => this.provinces = respone )
+    this.categoriesService.getAll().subscribe((response)=>this.listCategories = response)
   }
   
   

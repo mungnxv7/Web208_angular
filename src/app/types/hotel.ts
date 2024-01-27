@@ -1,3 +1,16 @@
+ export interface ListHotel{
+  docs:Hotel,
+  hasNextPage: object
+  hasPrevPage: object
+  limit: number
+  nextPage: number
+  page: number
+  pagingCounter: number
+  prevPage: object
+  totalDocs: number
+  totalPages: number
+ }
+ 
  export interface Hotel {
   _id: string
   hotelName: string,

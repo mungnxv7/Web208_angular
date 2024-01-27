@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute,Router } from '@angular/router';
-import { UsersService } from '../../services/users.service';
-import { User } from '../../types/user';
+import { UsersService } from '../../../services/users.service';
+import { User } from '../../../types/user';
 
 @Component({
   selector: 'app-update-user',

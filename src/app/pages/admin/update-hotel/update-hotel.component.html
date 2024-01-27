@@ -1,44 +1,130 @@
-<form action="" #hotelForm="ngForm"  (ngSubmit)="onSubmit(hotelForm)" enctype="multipart/form-data">
-  
+<form
+  action=""
+  #hotelForm="ngForm"
+  (ngSubmit)="onSubmit(hotelForm)"
+  enctype="multipart/form-data"
+>
   <div class="border-b border-gray-900/10 pb-12">
-    <h2 class="text-2xl font-semibold leading-7 text-gray-900">Thêm mới khách sạn</h2>
+    <h2 class="text-2xl font-semibold leading-7 text-gray-900">
+      Thêm mới khách sạn
+    </h2>
     <p class="mt-1 text-sm leading-6 text-gray-600"></p>
-  
+
     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
       <div class="sm:col-span-3">
-        <label for="hotelName" class="block text-sm font-medium leading-6 text-gray-900">Tên khách sạn</label>
+        <label
+          for="hotelName"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Tên khách sạn</label
+        >
         <div class="mt-2">
-          <input [required]="true" #hotelName="ngModel" [(ngModel)]="formData.hotelName" type="text" name="hotelName" id="hotelName" autocomplete="given-name" class="block w-full px-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <input
+            [required]="true"
+            #hotelName="ngModel"
+            [(ngModel)]="formData.hotelName"
+            type="text"
+            name="hotelName"
+            id="hotelName"
+            autocomplete="given-name"
+            class="block w-full px-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
         </div>
-        <div *ngIf="hotelName.invalid && (hotelName.touched || hotelForm.submitted)" class="error-message">
-          <p class="text-xs text-red-500" *ngIf="hotelName.errors!['required']">Vui lòng điền tên khách sạn</p>
+        <div
+          *ngIf="
+            hotelName.invalid && (hotelName.touched || hotelForm.submitted)
+          "
+          class="error-message"
+        >
+          <p class="text-xs text-red-500" *ngIf="hotelName.errors!['required']">
+            Vui lòng điền tên khách sạn
+          </p>
         </div>
       </div>
-  
+
       <div class="sm:col-span-3">
-        <label for="hotelType" class="block text-sm font-medium leading-6 text-gray-900">Loại khách sạn</label>
+        <label
+          for="hotelType"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Loại khách sạn</label
+        >
         <div class="mt-2">
-          <input [required]="true" #hotelType="ngModel" [(ngModel)]="formData.hotelType" type="text" name="hotelType" id="hotelType" autocomplete="family-name" class="block px-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <select
+            [required]="true"
+            #hotelType="ngModel"
+            [(ngModel)]="formData.hotelType"
+            name="hotelType"
+            id="hotelType"
+            class="block px-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+          >
+            <option hidden value="">---Chọn danh mục---</option>
+            <option
+              *ngFor="let category of listCategories"
+              [value]="category._id"
+            >
+              {{ category.name }}
+            </option>
+          </select>
         </div>
-        <div *ngIf="hotelType.invalid && (hotelType.touched || hotelForm.submitted)" class="error-message">
-          <p class="text-xs text-red-500" *ngIf="hotelType.errors!['required']">Vui lòng chọn kiểu khách sạn</p>
+        <div
+          *ngIf="
+            hotelType.invalid && (hotelType.touched || hotelForm.submitted)
+          "
+          class="error-message"
+        >
+          <p class="text-xs text-red-500" *ngIf="hotelType.errors!['required']">
+            Vui lòng chọn kiểu khách sạn
+          </p>
         </div>
       </div>
-  
+
       <div class="sm:col-span-3">
-        <label for="hotelImage" class="block text-sm font-medium leading-6 text-gray-900">Ảnh khách sạn</label>
+        <label
+          for="hotelImage"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Ảnh khách sạn</label
+        >
         <div class="mt-2">
-          <input [required]="true" #hotelImage="ngModel"  [(ngModel)]="formData.hotelImage.path" type="text" name="hotelImage" id="hotelImage" autocomplete="family-name" class="block px-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <input
+            [required]="true"
+            #hotelImage="ngModel"
+            [(ngModel)]="formData.hotelImage.path"
+            type="text"
+            name="hotelImage"
+            id="hotelImage"
+            autocomplete="family-name"
+            class="block px-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
         </div>
-        <div *ngIf="hotelImage.invalid && (hotelImage.touched || hotelForm.submitted)" class="error-message">
-          <p class="text-xs text-red-500" *ngIf="hotelImage.errors!['required']">Vui lòng điền ảnh khách sạn</p>
+        <div
+          *ngIf="
+            hotelImage.invalid && (hotelImage.touched || hotelForm.submitted)
+          "
+          class="error-message"
+        >
+          <p
+            class="text-xs text-red-500"
+            *ngIf="hotelImage.errors!['required']"
+          >
+            Vui lòng điền ảnh khách sạn
+          </p>
         </div>
       </div>
-  
+
       <div class="sm:col-span-3">
-        <label for="ranking" class="block text-sm font-medium leading-6 text-gray-900">Xếp hạng khách sạn</label>
+        <label
+          for="ranking"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Xếp hạng khách sạn</label
+        >
         <div class="mt-2">
-          <select required #ranking="ngModel" [(ngModel)]="formData.ranking" name="ranking" id="ranking" class="block px-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+          <select
+            required
+            #ranking="ngModel"
+            [(ngModel)]="formData.ranking"
+            name="ranking"
+            id="ranking"
+            class="block px-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+          >
             <option hidden value="">Chọn xếp hạng</option>
             <option value="1">1 sao</option>
             <option value="2">2 sao</option>
@@ -47,70 +133,185 @@
             <option value="5">5 sao</option>
           </select>
         </div>
-        <div *ngIf="ranking.invalid && (ranking.touched || hotelForm.submitted)" class="error-message">
-          <p class="text-xs text-red-500" *ngIf="ranking.errors!['required']">Vui lòng chọn xếp hạng</p>
+        <div
+          *ngIf="ranking.invalid && (ranking.touched || hotelForm.submitted)"
+          class="error-message"
+        >
+          <p class="text-xs text-red-500" *ngIf="ranking.errors!['required']">
+            Vui lòng chọn xếp hạng
+          </p>
         </div>
       </div>
-  
+
       <div class="sm:col-span-2">
-        <label for="province" class="block text-sm font-medium leading-6 text-gray-900">Thành phố / tỉnh</label>
+        <label
+          for="province"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Thành phố / tỉnh</label
+        >
         <div class="mt-2">
-          <select required #province="ngModel" [(ngModel)]="formData.address.province"  (change)="getDistrictsByValueProvince()"  id="province" name="province" autocomplete="country-name" class="block px-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-            <option [value]="null" selected>abc</option>
-            <option *ngFor="let item of provinces" [ngValue]="item.code" >{{item.name}}</option>
+          <select
+            required
+            #province="ngModel"
+            [(ngModel)]="formData.address.province"
+            (change)="getDistrictsByValueProvince()"
+            id="province"
+            name="province"
+            autocomplete="country-name"
+            class="block px-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+          >
+            <option *ngFor="let item of provinces" [ngValue]="item.code">
+              {{ item.name }}
+            </option>
           </select>
         </div>
-        <div *ngIf="province.invalid && (province.touched || hotelForm.submitted)" class="error-message">
-          <p class="text-xs text-red-500" *ngIf="province.errors!['required']">Vui lòng chọn thành phố, tỉnh</p>
+        <div
+          *ngIf="province.invalid && (province.touched || hotelForm.submitted)"
+          class="error-message"
+        >
+          <p class="text-xs text-red-500" *ngIf="province.errors!['required']">
+            Vui lòng chọn thành phố, tỉnh
+          </p>
         </div>
       </div>
-  
+
       <div class="sm:col-span-2">
-        <label for="district" class="block text-sm font-medium leading-6 text-gray-900">Quận / huyện</label>
+        <label
+          for="district"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Quận / huyện</label
+        >
         <div class="mt-2">
-          <select required #district="ngModel" [(ngModel)]="formData.address.district" (change)="getWardByValueDistrict()" id="district" name="district" autocomplete="district-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-            <option *ngFor="let item of districts.districts" [ngValue]="item.code">{{item.name}}</option>
+          <select
+            required
+            #district="ngModel"
+            [(ngModel)]="formData.address.district"
+            (change)="getWardByValueDistrict()"
+            id="district"
+            name="district"
+            autocomplete="district-name"
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+          >
+            <option
+              *ngFor="let item of districts.districts"
+              [ngValue]="item.code"
+            >
+              {{ item.name }}
+            </option>
           </select>
         </div>
-        <div *ngIf="district.invalid && (district.touched || hotelForm.submitted)" class="error-message">
-          <p class="text-xs text-red-500" *ngIf="district.errors!['required']">Vui lòng chọn quận, huyện</p>
+        <div
+          *ngIf="district.invalid && (district.touched || hotelForm.submitted)"
+          class="error-message"
+        >
+          <p class="text-xs text-red-500" *ngIf="district.errors!['required']">
+            Vui lòng chọn quận, huyện
+          </p>
         </div>
       </div>
-  
+
       <div class="sm:col-span-2">
-        <label for="ward" class="block text-sm font-medium leading-6 text-gray-900">Phường / xã</label>
+        <label
+          for="ward"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Phường / xã</label
+        >
         <div class="mt-2">
-          <select [required]="true" #ward="ngModel" [(ngModel)]="formData.address.ward" id="ward" name="ward" autocomplete="district-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-            <option *ngFor="let item of wards.wards" [ngValue]="item.code">{{item.name}}</option>
+          <select
+            [required]="true"
+            #ward="ngModel"
+            [(ngModel)]="formData.address.ward"
+            id="ward"
+            name="ward"
+            autocomplete="district-name"
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+          >
+            <option *ngFor="let item of wards.wards" [ngValue]="item.code">
+              {{ item.name }}
+            </option>
           </select>
         </div>
-        <div *ngIf="ward.invalid && (ward.touched || hotelForm.submitted)" class="error-message">
-          <p class="text-xs text-red-500" *ngIf="ward.errors!['required']">Vui lòng chọn phường, xã</p>
+        <div
+          *ngIf="ward.invalid && (ward.touched || hotelForm.submitted)"
+          class="error-message"
+        >
+          <p class="text-xs text-red-500" *ngIf="ward.errors!['required']">
+            Vui lòng chọn phường, xã
+          </p>
         </div>
       </div>
-  
+
       <div class="col-span-full">
-        <label for="street_address" class="block text-sm font-medium leading-6 text-gray-900">Số nhà, đường</label>
+        <label
+          for="street_address"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Số nhà, đường</label
+        >
         <div class="mt-2">
-          <input [required]="true" #street_address="ngModel" [(ngModel)]="formData.address.street_address" type="text" name="street_address" id="street_address" autocomplete="street-address" class="block px-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <input
+            [required]="true"
+            #street_address="ngModel"
+            [(ngModel)]="formData.address.street_address"
+            type="text"
+            name="street_address"
+            id="street_address"
+            autocomplete="street-address"
+            class="block px-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
         </div>
-        <div *ngIf="street_address.invalid && (street_address.touched || hotelForm.submitted)" class="error-message">
-          <p class="text-xs text-red-500" *ngIf="street_address.errors!['required']">Vui lòng điền số nhà, đường</p>
+        <div
+          *ngIf="
+            street_address.invalid &&
+            (street_address.touched || hotelForm.submitted)
+          "
+          class="error-message"
+        >
+          <p
+            class="text-xs text-red-500"
+            *ngIf="street_address.errors!['required']"
+          >
+            Vui lòng điền số nhà, đường
+          </p>
         </div>
       </div>
-  
+
       <div class="w-full col-span-full">
-        <label for="city" class="block text-sm font-medium leading-6 text-gray-900">Mô tả khách sạn</label>
+        <label
+          for="city"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Mô tả khách sạn</label
+        >
         <div class="mt-2">
-          <angular-editor [required]="true" #descreiptionHotel="ngModel" [config]="editorConfig" [(ngModel)]="formData.descreiptionHotel"  name="descreiptionHotel"></angular-editor>
+          <angular-editor
+            [required]="true"
+            #descreiptionHotel="ngModel"
+            [config]="editorConfig"
+            [(ngModel)]="formData.descreiptionHotel"
+            name="descreiptionHotel"
+          ></angular-editor>
         </div>
-        <div *ngIf="descreiptionHotel.invalid && (descreiptionHotel.touched || hotelForm.submitted)" class="error-message">
-          <p class="text-xs text-red-500" *ngIf="descreiptionHotel.errors!['required']">Vui lòng điền mô tả cho khách sạn</p>
+        <div
+          *ngIf="
+            descreiptionHotel.invalid &&
+            (descreiptionHotel.touched || hotelForm.submitted)
+          "
+          class="error-message"
+        >
+          <p
+            class="text-xs text-red-500"
+            *ngIf="descreiptionHotel.errors!['required']"
+          >
+            Vui lòng điền mô tả cho khách sạn
+          </p>
         </div>
       </div>
     </div>
   </div>
   <div>
-    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Lưu lại</button>
+    <button
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+    >
+      Lưu lại
+    </button>
   </div>
-  </form>
+</form>

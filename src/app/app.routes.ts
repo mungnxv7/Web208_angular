@@ -11,7 +11,10 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ListUsersComponent } from './pages/admin/list-users/list-users.component';
 import { CreateUserComponent } from './pages/admin/create-user/create-user.component';
-import { UpdateUserComponent } from './pages/update-user/update-user.component';
+import { UpdateUserComponent } from './pages/admin/update-user/update-user.component';
+import { ListCategoriesComponent } from './pages/admin/list-categories/list-categories.component';
+import { CreateCategoriesComponent } from './pages/admin/create-categories/create-categories.component';
+import { UpdateCategoriesComponent } from './pages/admin/update-categories/update-categories.component';
 
 export const routes: Routes = [
     {path: '', component:ViewUserComponent,children:[{path:'',component:HomeComponent}]},
@@ -20,13 +23,17 @@ export const routes: Routes = [
     {path: 'register', component:RegisterComponent},
     
     {path: 'admin', component:ViewAdminComponent,children:[
+        // hotels
         {path:'hotels/create',component:CreateHotelComponent},
         {path:'hotels/list',component:ListHotelComponent},
         {path:'hotels/edit/:id',component:UpdateHotelComponent},
-
+        // users
         {path:'users/list',component:ListUsersComponent},
         {path:'users/create',component:CreateUserComponent},
-        {path:'users/edit/:id',component:UpdateUserComponent}
+        {path:'users/edit/:id',component:UpdateUserComponent},
+        // categories
+        {path:'categories/list',component:ListCategoriesComponent},
+        {path:'categories/create',component:CreateCategoriesComponent},
+        {path:'categories/edit/:id',component:UpdateCategoriesComponent}
     ]},
-    // {path: 'admin', component:ViewAdminComponent,children:[{path:'hotels/update/:id',component:UpdateHotelComponent}]}
 ];

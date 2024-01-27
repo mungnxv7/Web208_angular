@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormHotel, Hotel } from '../../../types/hotel';
+import { CategoriesService } from '../../../services/categories.service';
+import { Categories } from '../../../types/categories';
 
 @Component({
   selector: 'app-update-hotel',
@@ -17,6 +19,8 @@ import { FormHotel, Hotel } from '../../../types/hotel';
 export class UpdateHotelComponent implements OnInit {
   provincesService = inject(ProvincesService)
   hotelSevices = inject(HotelsService)
+  categoriesService = inject(CategoriesService)
+  listCategories:Categories[] = []
   provinces:any = []
   districts:any = []
   wards:any = []
@@ -43,6 +47,7 @@ export class UpdateHotelComponent implements OnInit {
   };
 
 ngOnInit(){
+  this.categoriesService.getAll().subscribe((response)=>this.listCategories = response)
   this.route.params.subscribe((param) => {
       this.hotelId = param['id'];
       this.hotelSevices.getHotelDetail(this.hotelId).subscribe((hotel)=> {
