@@ -25,6 +25,8 @@ export class AdminNavbarComponent {
     this.searchSubject.pipe(debounceTime(1000)).subscribe(() => {
       if(this.textSearch){
         this.hotelSevices.searchHotels(this.textSearch).subscribe((response) => this.listSearch = response)
+      }else{
+        this.listSearch = []
       }
     });
   }
