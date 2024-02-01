@@ -1,12 +1,12 @@
  export interface ListHotel{
-  docs:Hotel,
-  hasNextPage: object
-  hasPrevPage: object
+  docs:Hotel[],
+  hasNextPage: boolean
+  hasPrevPage: boolean
   limit: number
-  nextPage: number
+  nextPage: number | null
   page: number
   pagingCounter: number
-  prevPage: object
+  prevPage: number |null
   totalDocs: number
   totalPages: number
  }
@@ -14,7 +14,10 @@
  export interface Hotel {
   _id: string
   hotelName: string,
-  hotelType: string,
+  hotelType: {
+    _id: string,
+    name: string
+  }
   address: {
     province: number,
     district: number,
@@ -23,12 +26,9 @@
   },
   hotelImage: {
     path: string,
-    id_imag: string
+    filename: string
   },
   ranking: number,
-  utilities: [
-    string
-  ],
   descreiptionHotel: string
 }
 
@@ -43,6 +43,7 @@ export interface FormHotel {
   },
   hotelImage: {
     path: string,
+    filename: string
   },
   ranking: string,
   descreiptionHotel: string

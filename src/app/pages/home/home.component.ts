@@ -18,8 +18,8 @@ export class HomeComponent {
   hotelsService = inject(HotelsService);
   hotelList:Hotel[] = [];
   ngOnInit(): void {
-    this.hotelsService
-      .getHotelList()
-      .subscribe((response) => (this.hotelList = response)); // callApi.then(cb fuc)
+    // this.hotelsService
+    //   .getHotelList()
+    //   .subscribe((response) => (this.hotelList = response));
   }
 }

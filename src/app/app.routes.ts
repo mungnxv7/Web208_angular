@@ -15,6 +15,7 @@ import { UpdateUserComponent } from './pages/admin/update-user/update-user.compo
 import { ListCategoriesComponent } from './pages/admin/list-categories/list-categories.component';
 import { CreateCategoriesComponent } from './pages/admin/create-categories/create-categories.component';
 import { UpdateCategoriesComponent } from './pages/admin/update-categories/update-categories.component';
+import { HotelDetailComponent } from './pages/admin/hotel-detail/hotel-detail.component';
 
 export const routes: Routes = [
     {path: '', component:ViewUserComponent,children:[{path:'',component:HomeComponent}]},
@@ -27,6 +28,7 @@ export const routes: Routes = [
         {path:'hotels/create',component:CreateHotelComponent},
         {path:'hotels/list',component:ListHotelComponent},
         {path:'hotels/edit/:id',component:UpdateHotelComponent},
+        {path:'hotels/:id',component:HotelDetailComponent},
         // users
         {path:'users/list',component:ListUsersComponent},
         {path:'users/create',component:CreateUserComponent},

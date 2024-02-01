@@ -1,4 +1,4 @@
-<!-- <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
   <div>
     <a href="/admin/hotels/create">
       <button
@@ -9,8 +9,65 @@
       </button>
     </a>
   </div>
+  <div class="mt-5">
+    <div class="relative flex items-center p-4">
+      <button
+        id="dropdownDefault"
+        (click)="dropDown()"
+        data-dropdown-toggle="dropdown"
+        class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 inline-flex items-center"
+        type="button"
+      >
+        Filter by category
+        <svg
+          class="w-4 h-4 ml-2"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          ></path>
+        </svg>
+      </button>
+
+      <!-- Dropdown menu -->
+      <div
+        *ngIf="dropdowns"
+        class="z-10 w-56 absolute top-full bg-white rounded-lg shadow dark:bg-gray-700 overflow-hidden"
+      >
+        <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+          <li
+            *ngFor="let category of listCategory"
+            class="flex items-center hover:bg-gray-500 p-2"
+          >
+            <input
+              [id]="category.name"
+              [checked]="arrayIdCategory.includes(category._id)"
+              (click)="onChangeCategory(category._id)"
+              type="checkbox"
+              [value]="category._id"
+              class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+            />
+
+            <label
+              for="{{ category.name }}"
+              class="ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-100 cursor-pointer"
+            >
+              {{ category.name }}
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <table
-    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+    class="mt-8 w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
   >
     <thead
       class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -25,7 +82,7 @@
     </thead>
     <tbody>
       <tr
-        *ngFor="let hotel of listHotels"
+        *ngFor="let hotel of listHotels?.docs"
         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
       >
         <td
@@ -44,7 +101,6 @@
           </div>
         </td>
         <td class="py-4">
-        {{hotel.address.province}}
           {{ hotel.address.street_address }}
         </td>
         <td class="px-6 py-4">
@@ -70,4 +126,49 @@
       </tr>
     </tbody>
   </table>
-</div> -->
+
+  <nav aria-label="Page navigation example" class="my-5" *ngIf="listHotels">
+    <ul class="inline-flex -space-x-px text-sm">
+      <li>
+        <a
+          [routerLink]="
+            listHotels.prevPage == null ? null : '/admin/hotels/list '
+          "
+          [queryParams]="{ page: listHotels.prevPage }"
+          queryParamsHandling="merge"
+          [ngClass]="{
+            'cursor-no-drop': listHotels.prevPage == null,
+          }"
+          class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >Previous</a
+        >
+      </li>
+      <li *ngFor="let page of listPages">
+        <a
+          routerLink="/admin/hotels/list"
+          [queryParams]="{page}"
+          queryParamsHandling="merge"
+          [ngClass]="{
+            'dark:bg-gray-400': pageActive == page
+          }"
+          class="flex items-center justify-center px-3 h-8 leading-tight bg-gray-800 text-white border border-gray-300 hover:bg-gray-700 dark:border-gray-700"
+          >{{ page }}</a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="
+            listHotels.nextPage == null ? null : '/admin/hotels/list '
+          "
+          [queryParams]="{ page: listHotels.nextPage }"
+          queryParamsHandling="merge"
+          [ngClass]="{
+            'cursor-no-drop': listHotels.nextPage == null,
+          }"
+          class="flex items-center justify-center px-3 h-8 leading-tight text-white bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+          >Next</a
+        >
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -12,19 +12,22 @@ export class HotelsService {
   apiUrl = 'https://web208-angular-backend.vercel.app/hotels'// khai bao apiUrl
   http = inject(HttpClient); // inject bien http
 
-  getHotelList(): Observable<any> {
-    return this.http.get<any>(this.apiUrl); //axios.get(apiUrl)
+  getHotelList(params:any){
+    return this.http.get<any>(`${this.apiUrl}`,{params:params})
+  }
+  searchHotels(params:any){
+    return this.http.get<any>(`${this.apiUrl}/search`,{params:{name:params}})
   }
   deleteHotel(id: string){
-    return this.http.delete<any>(`${this.apiUrl}/${id}`,{headers:configHeaders}); //axios.get(apiUrl)
+    return this.http.delete<any>(`${this.apiUrl}/${id}`,{headers:configHeaders})
   }
   createHotel(hotel:any):Observable<any>{
-    return this.http.post<any>(this.apiUrl, hotel,{headers:configHeaders} ); //axios.get(apiUrl)
+    return this.http.post<any>(this.apiUrl, hotel,{headers:configHeaders} )
   }
   updateHotel(id:string,hotel:any):Observable<any>{
-    return this.http.put<any>(this.apiUrl+ `/${id}`,hotel,{headers:configHeaders} ); //axios.get(apiUrl)
+    return this.http.put<any>(this.apiUrl+ `/${id}`,hotel,{headers:configHeaders} )
   }
   getHotelDetail(id: string):Observable<Hotel>{
-    return this.http.get<Hotel>(`${this.apiUrl}/${id}`); //axios.get(apiUrl)
+    return this.http.get<Hotel>(`${this.apiUrl}/${id}`)
   }
 }

@@ -34,7 +34,8 @@ export class UpdateHotelComponent implements OnInit {
     hotelName: '',
     hotelType:'',
     hotelImage:{
-      path:''
+      path:'',
+      filename:''
     },
     ranking:'',
     address: {
@@ -57,9 +58,10 @@ ngOnInit(){
         this.provincesService.getWardByDistricts(hotel.address.district).subscribe((response) => this.wards = response)
         this.formData = {
           hotelName: hotel.hotelName,
-          hotelType:hotel.hotelType,
+          hotelType:hotel.hotelType._id,
           hotelImage:{
-            path:hotel.hotelImage.path
+            path:hotel.hotelImage.path,
+            filename:hotel.hotelImage.filename
           },
           ranking:`${hotel.ranking}`,
           address: {

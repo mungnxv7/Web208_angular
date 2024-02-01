@@ -1,0 +1,18 @@
+<div class="w-full flex gap-5">
+  <img class="w-2/5" [src]="hotelDetail.hotelImage.path" alt="" />
+  <div>
+    <h2 class="text-3xl font-bold">{{ hotelDetail.hotelName }}</h2>
+    <app-ranking-star [numberRank]="hotelDetail.ranking" />
+    <p class="text-lg font-medium">
+      Loại:
+      <span class="text-base font-light">Khách sạn</span>
+    </p>
+    <p>
+      Địa chỉ: <span>{{ hotelDetail.address.street_address }}</span>
+    </p>
+    <div>
+      <p>Mô tả:</p>
+      <span>{{ hotelDetail.descreiptionHotel }}</span>
+    </div>
+  </div>
+</div>
