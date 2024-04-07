@@ -72,17 +72,23 @@
         <!-- Navigation -->
 
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
-          <li class="items-center">
+          <li
+            class="items-center"
+            [class.text-red-500]="isActive('/admin/hotels')"
+          >
             <a
               routerLink="/admin/hotels/list"
               class="text-xs uppercase py-3 font-bold block"
-              routerLinkActive
+              routerLinkActive="text-red-500"
             >
               Hotels
             </a>
           </li>
 
-          <li class="items-center">
+          <li
+            class="items-center"
+            [class.text-red-500]="isActive('/admin/users')"
+          >
             <a
               routerLink="/admin/users/list"
               class="text-xs uppercase py-3 font-bold block"
@@ -91,7 +97,10 @@
               Users
             </a>
           </li>
-          <li class="items-center">
+          <li
+            class="items-center"
+            [class.text-red-500]="isActive('/admin/categories')"
+          >
             <a
               routerLink="/admin/categories/list"
               class="text-xs uppercase py-3 font-bold block"
@@ -106,28 +115,6 @@
         <hr class="my-4 md:min-w-full" />
         <!-- Heading -->
         <!-- Navigation -->
-
-        <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-          <li class="items-center">
-            <a
-              class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-            >
-              <i class="fas fa-fingerprint text-blueGray-300 mr-2 text-sm"></i>
-              Login
-            </a>
-          </li>
-
-          <li class="items-center">
-            <a
-              class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-            >
-              <i
-                class="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"
-              ></i>
-              Register
-            </a>
-          </li>
-        </ul>
       </div>
     </div>
   </nav>
