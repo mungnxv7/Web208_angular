@@ -18,9 +18,9 @@ import { UpdateCategoriesComponent } from './pages/admin/update-categories/updat
 import { HotelDetailComponent } from './pages/admin/hotel-detail/hotel-detail.component';
 
 export const routes: Routes = [
-    {path: '', component:ViewUserComponent,children:[{path:'',component:HomeComponent}]},
+    // {path: '', component:ViewUserComponent,children:[{path:'',component:HomeComponent}]},
+    {path: '', component:LoginComponent},
     {path: 'shop', component:ViewUserComponent,children:[{path:'',component:ProductCardComponent}]},
-    {path: 'login', component:LoginComponent},
     {path: 'register', component:RegisterComponent},
     
     {path: 'admin', component:ViewAdminComponent,children:[

@@ -18,8 +18,8 @@ export class LoginComponent {
   toastr = inject(ToastrService)
   userService = inject(UsersService)
   fomrLogin = {
-    email:'',
-    password:''
+    email:'admin@gmail.com',
+    password:'Admin1'
   }
   onSubmit(loginForm:any){
     if(loginForm.valid){
